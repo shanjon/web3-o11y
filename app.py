@@ -2,7 +2,7 @@ from web3 import Web3
 import requests
 
 # Infura credentials used to simulate accessing a node
-infura_url = "https://mainnet.infura.io/v3/ba1169c3f1664f199460ec3f2a309e3c"
+infura_url = "XXXXXXXXXXXXXXXXXXXXX"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
 # Confirm connection to web3
@@ -19,14 +19,14 @@ cuban_balance = web3.eth.getBalance("0xa679c6154b8d4619Af9F83f0bF9a13A680e01eCf"
 headers = {'X-Insert-Key': '0c68ed1c1990c38fd55ede5fe96da0fc83bad06f', 'Content-Type': 'application/json'}
 payload = {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'ParisHilton','balance':paris_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'SnoopDogg', 'balance':snoop_balance}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'SerenaWilliams', 'balance':serena_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'LindsayLohan', 'balance':lohan_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'MarkCuban', 'balance':cuban_balance/1000000000000000000},
 
-r = requests.post("https://insights-collector.newrelic.com/v1/accounts/1336182/events", json=payload, headers=headers)
+r = requests.post("https://insights-collector.newrelic.com/v1/accounts/XXXXXXX/events", json=payload, headers=headers)
 
 # Get latest block stats
 # blockNumber = web3.eth.blockNumber
 block = web3.eth.get_block('latest')
 
 # POST request to Events API for whale balances
-headers = {'X-Insert-Key': '0c68ed1c1990c38fd55ede5fe96da0fc83bad06f', 'Content-Type': 'application/json'}
+headers = {'X-Insert-Key': 'XXXXXXXXXXXXXXXXXXXXX', 'Content-Type': 'application/json'}
 
 payload = {
     "eventType": "blockStatz",
