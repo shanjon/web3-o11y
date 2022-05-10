@@ -38,6 +38,6 @@ payload = {
     'uncles': block.uncles,
 }
 
-r = requests.post("https://insights-collector.newrelic.com/v1/accounts/1336182/events", json=payload, headers=headers)
+r = requests.post("https://insights-collector.newrelic.com/v1/accounts/XXXXXXX/events", json=payload, headers=headers)
 
 print('success')
