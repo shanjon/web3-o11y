@@ -1,0 +1,198 @@
+{
+  "name": "web3",
+  "description": null,
+  "permissions": "PUBLIC_READ_WRITE",
+  "pages": [
+    {
+      "name": "Etherscan",
+      "description": null,
+      "widgets": [
+        {
+          "title": "",
+          "layout": {
+            "column": 1,
+            "row": 1,
+            "width": 3,
+            "height": 2
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.markdown"
+          },
+          "rawConfiguration": {
+            "text": "![Bored Ape logo](https://www.cnet.com/a/img/resize/bcbb35920633f8c87106ae40f487857bb0f567da/2021/11/19/ffc31f0e-a80b-43ee-a749-19810e327a06/bored-apes-better.jpg?auto=webp&fit=crop&height=675&width=1200)"
+          }
+        },
+        {
+          "title": "Whale Wallet Changes",
+          "layout": {
+            "column": 4,
+            "row": 1,
+            "width": 6,
+            "height": 4
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.stacked-bar"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "FROM walletBalance SELECT average(balance) FACET whale TIMESERIES SINCE 1 WEEK AGO"
+              }
+            ]
+          }
+        },
+        {
+          "title": "Top 10 Miners This Week",
+          "layout": {
+            "column": 10,
+            "row": 1,
+            "width": 3,
+            "height": 4
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.bar"
+          },
+          "rawConfiguration": {
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "SELECT count(*) FROM blockStatz FACET miner SINCE 1 WEEK AGO LIMIT 10"
+              }
+            ]
+          }
+        },
+        {
+          "title": "walletBalance by Whale (ETH)",
+          "layout": {
+            "column": 1,
+            "row": 3,
+            "width": 3,
+            "height": 6
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.billboard"
+          },
+          "rawConfiguration": {
+            "dataFormatters": [
+              {
+                "name": "numeric(balance)",
+                "precision": 5,
+                "type": "decimal"
+              }
+            ],
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "FROM walletBalance  SELECT latest(numeric(balance)) FACET whale "
+              }
+            ],
+            "thresholds": []
+          }
+        },
+        {
+          "title": "gasPrice (wei)",
+          "layout": {
+            "column": 4,
+            "row": 5,
+            "width": 5,
+            "height": 4
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.area"
+          },
+          "rawConfiguration": {
+            "dataFormatters": [
+              {
+                "name": "Wei",
+                "precision": null,
+                "type": "decimal"
+              }
+            ],
+            "facet": {
+              "showOtherSeries": false
+            },
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "FROM gasPrice SELECT average(price) as 'Wei' TIMESERIES SINCE 1 DAY AGO"
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Mining Difficulty",
+          "layout": {
+            "column": 9,
+            "row": 5,
+            "width": 4,
+            "height": 4
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.line"
+          },
+          "rawConfiguration": {
+            "legend": {
+              "enabled": true
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "FROM blockStatz SELECT average(difficulty) TIMESERIES since 1 day ago "
+              }
+            ],
+            "yAxisLeft": {
+              "zero": true
+            }
+          }
+        },
+        {
+          "title": "Block Activity",
+          "layout": {
+            "column": 1,
+            "row": 9,
+            "width": 12,
+            "height": 4
+          },
+          "linkedEntityGuids": null,
+          "visualization": {
+            "id": "viz.table"
+          },
+          "rawConfiguration": {
+            "dataFormatters": [],
+            "facet": {
+              "showOtherSeries": false
+            },
+            "nrqlQueries": [
+              {
+                "accountId": 0,
+                "query": "FROM blockStatz SELECT  number, miner, difficulty, gasLimit, gasUsed, size SINCE 1 DAY AGO"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
