@@ -32,7 +32,6 @@ payload = {
     'difficulty': block.difficulty,
     'gasLimit': block.gasLimit,
     'gasUsed': block.gasUsed,
-    'hashRate': hash_rate,
     'miner': block.miner,
     'number': block.number,
     'size': block.size,
