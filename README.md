@@ -42,11 +42,12 @@ this will generate the following custom events:
 - `blockStatz`: contains the `difficulty`, `gasLimit`, `gasUsed`, `miner`, `number`, and `size` of latest block mined
 - `gasPrice`: contains the current `price` or fee per transaction on Ethereum in wei - _one ether = 1,000,000,000,000,000,000 wei (10^18)_
 
-### NRQL
+### NRQL example queries
 ``SELECT * FROM walletBalance`` <br>
 ``SELECT * FROM blockStatz`` <br>
 ``SELECT * FROM gasPrice`` <br>
 
 
 ### dashboard
-find and replace the `accountId` parameter in the `dashboard.json` file and then import the json to New Relic to see the following dashboard populate
+find and replace the `accountId` parameter in the `dashboard.json` file and then import the json to New Relic to use this example dashboard
+<img width="954" alt="image" src="https://user-images.githubusercontent.com/68360819/167527943-ada11443-c66c-4c23-9420-bcc647dfb19c.png">
