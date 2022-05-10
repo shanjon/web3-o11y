@@ -22,7 +22,6 @@ payload = {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'ParisHil
 r = requests.post("https://insights-collector.newrelic.com/v1/accounts/XXXXXXX/events", json=payload, headers=headers)
 
 # Get latest block stats
-# blockNumber = web3.eth.blockNumber
 block = web3.eth.get_block('latest')
 
 # POST request to Events API for whale balances
@@ -31,20 +30,12 @@ headers = {'X-Insert-Key': 'XXXXXXXXXXXXXXXXXXXXX', 'Content-Type': 'application
 payload = {
     "eventType": "blockStatz",
     'difficulty': block.difficulty,
-    #err 'extraData': block.extraData,
     'gasLimit': block.gasLimit,
     'gasUsed': block.gasUsed,
-    #err 'hash': block.hash,
-    #err 'logsBloom': block.logsBloom,
+    'hashRate': hash_rate,
     'miner': block.miner,
-    # 'nonce': block.nonce,
     'number': block.number,
-    #err 'parentHash': block.parentHash,
-    #err 'sha3Uncles': block.sha3Uncles,
     'size': block.size,
-    #err 'stateRoot': block.stateRoot,
-    #err 'totalDifficulty': block.totalDifficulty,
-    #err 'transactionsRoot': block.transactionsRoot,
     'uncles': block.uncles,
 }
 
