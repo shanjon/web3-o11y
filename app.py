@@ -5,6 +5,10 @@ import requests
 infura_url = "XXXXXXXXXXXXXXXXXXXXX"
 web3 = Web3(Web3.HTTPProvider(infura_url))
 
+# New Relic Account ID and API Key
+account_id = XXXXXXX
+insert_api_key = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+
 # Confirm connection to web3
 print(web3.isConnected())
 
@@ -16,16 +20,16 @@ lohan_balance = web3.eth.getBalance("0x3781d92e5449b5b689fEe308ded44882085b6312"
 cuban_balance = web3.eth.getBalance("0xa679c6154b8d4619Af9F83f0bF9a13A680e01eCf")
 
 # POST request to Events API for whale balances
-headers = {'X-Insert-Key': '0c68ed1c1990c38fd55ede5fe96da0fc83bad06f', 'Content-Type': 'application/json'}
+headers = {'X-Insert-Key': insert_api_key, 'Content-Type': 'application/json'}
 payload = {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'ParisHilton','balance':paris_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'SnoopDogg', 'balance':snoop_balance}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'SerenaWilliams', 'balance':serena_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'LindsayLohan', 'balance':lohan_balance/1000000000000000000}, {'eventType':'walletBalance', 'currency':'Ethereum', 'whale':'MarkCuban', 'balance':cuban_balance/1000000000000000000},
 
-r = requests.post("https://insights-collector.newrelic.com/v1/accounts/XXXXXXX/events", json=payload, headers=headers)
+r = requests.post("https://insights-collector.newrelic.com/v1/accounts/{account_id}/events", json=payload, headers=headers)
 
 # Get latest block stats
 block = web3.eth.get_block('latest')
 
 # POST request to Events API for whale balances
-headers = {'X-Insert-Key': 'XXXXXXXXXXXXXXXXXXXXX', 'Content-Type': 'application/json'}
+headers = {'X-Insert-Key': insert_api_key, 'Content-Type': 'application/json'}
 
 payload = {
     "eventType": "blockStatz",
@@ -38,6 +42,16 @@ payload = {
     'uncles': block.uncles,
 }
 
-r = requests.post("https://insights-collector.newrelic.com/v1/accounts/XXXXXXX/events", json=payload, headers=headers)
+r = requests.post("https://insights-collector.newrelic.com/v1/accounts/{account_id}/events", json=payload, headers=headers)
+
+## get gasPrice in Wei
+gasPrice = web3.eth.gas_price
+
+# POST request to Events API for gas price
+headers = {'X-Insert-Key': insert_api_key, 'Content-Type': 'application/json'}
+payload = {'eventType':'gasPrice', 'currency':'Wei', 'price':gasPrice}
+
+r = requests.post("https://insights-collector.newrelic.com/v1/accounts/{account_id}/events", json=payload, headers=headers)
+
 
 print('success')
