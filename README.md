@@ -1,4 +1,4 @@
-# web3-docker
+# web3-o11y
 
 use this repository to spin up a container that pulls data directly from Ethereum using Infura and Web3.py library. the data is then posted as custom events to the New Relic Metric API for querying and visualization.
 
